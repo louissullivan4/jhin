@@ -1,0 +1,17 @@
+{{!-- api_routes.hbs --}}
+from fastapi import APIRouter, HTTPException
+
+router = APIRouter(prefix="/{{tag}}", tags=["{{tag}}"])
+
+{{#each operations}}
+@router.{{lower method}}("{{path}}"
+  {{#if operation.responses.200.$ref}}
+    , response_model={{extractRefName operation.responses.200.$ref}}
+  {{/if}}
+)
+async def {{#if operation.operationId}}{{operation.operationId}}{{else}}{{lower method}}_{{sanitizePath path}}{{/if}}():
+    """
+    {{#if operation.description}}{{operation.description}}{{else}}{{method}} {{path}}{{/if}}
+    """
+    raise HTTPException(status_code=501, detail="Endpoint not implemented yet")
+{{/each}}

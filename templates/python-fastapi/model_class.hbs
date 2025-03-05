@@ -1,0 +1,41 @@
+{{#each importsList}}
+{{{this}}}
+{{/each}}
+from pydantic import BaseModel, Field
+{{#if createdEnums}}
+from enum import Enum
+{{/if}}
+
+{{#if createdEnums}}
+{{#each createdEnums}}
+class {{this.enumName}}(str, Enum):
+    {{#each this.values}}
+    {{../enumName}}_{{@index}} = "{{this}}"
+    {{/each}}
+{{/each}}
+{{/if}}
+
+class {{name}}(BaseModel):
+{{#if schema.processedProperties}}
+{{#each schema.processedProperties}}
+{{#if (or this.default this.example this.regex this.description)}}
+    {{@key}}: {{this.type}} = Field(
+        description="{{this.description}}",
+        {{#if this.regex}}regex={{{this.regex}}},{{/if}}
+        {{~#if this.example}}example={{this.example}},{{~/if}}
+        {{~#if this.default}}default={{this.default}},{{~/if}}
+    )
+{{else}}
+    {{@key}}: {{this.type}} = Field()
+{{/if}}
+{{/each}}
+{{else}}
+    pass
+{{/if}}
+
+    def to_dict(self) -> dict:
+        return super().dict()
+
+    @classmethod
+    def from_dict(cls, data: dict):
+        return cls(**data)

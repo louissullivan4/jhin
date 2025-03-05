@@ -1,0 +1,47 @@
+# Jhin
+
+## Introduction
+
+Jhin is a code generation tool used to generate server code based on your OpenAPI specification. This service helps you quickly scaffold API endpoints defined in your OpenAPI file, allowing you to focus on implementing business logic rather than boilerplate code.
+
+## Prerequisites
+
+- **python3 (v3.9 - v3.12)**
+
+## Installation
+
+Follow these steps to set up your development environment:
+
+1. Locate the generated code and run the following command in your Terminal:
+
+   ```bash
+   python -m venv venv
+   ```
+2. Activate the virtual environment:
+
+   ```bash
+   # On Unix or MacOS
+   source ./venv/bin/activate
+   ```
+
+3. Install required packages:
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+## Running the Server
+
+To start the FastAPI server, execute the following command:
+
+```bash
+  PYTHONPATH=src uvicorn main:app --reload
+```
+
+After running this command, the API server will be accessible at [http://localhost:8000](http://localhost:8000).
+
+## FAQS
+
+### 1. Why am I receiving 501 errors when calling the generated endpoints?
+
+The default implementation returns a 501 "Not Implemented" error. You must implement the functions required for your database or other connections.

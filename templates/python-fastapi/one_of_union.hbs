@@ -1,0 +1,9 @@
+{{!-- one_of_union.hbs --}}
+from typing import Union
+from pydantic import BaseModel
+
+class {{name}}Union(BaseModel):
+    # This is a simplistic representation of oneOf. In practice, implement discriminated union or advanced validation.
+    __root__: Union{{#each unionTypes}}
+        [{{this}}]{{#unless @last}}|{{/unless}}
+    {{/each}}
