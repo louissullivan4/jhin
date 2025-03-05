@@ -4,7 +4,7 @@ import * as path from 'path';
 import Handlebars from 'handlebars';
 
 export function loadTemplates(language: string): Record<string, Handlebars.TemplateDelegate> {
-  const templatesDir = path.join(__dirname, '..', '..', 'templates', language);
+  const templatesDir = path.join(__dirname, '..', 'templates', language);
 
   if (!fs.existsSync(templatesDir)) {
     throw new Error(`Templates for language '${language}' not found in ${templatesDir}`);
