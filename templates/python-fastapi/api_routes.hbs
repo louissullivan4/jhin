@@ -5,7 +5,7 @@ router = APIRouter(prefix="/{{tag}}", tags=["{{tag}}"])
 
 {{#each operations}}
 @router.{{lower method}}("{{path}}"
-  {{#if operation.responses.200.$ref}}
+  {{~#if operation.responses.200.$ref}}
     , response_model={{extractRefName operation.responses.200.$ref}}
   {{/if}}
 )
@@ -14,4 +14,5 @@ async def {{#if operation.operationId}}{{operation.operationId}}{{else}}{{lower 
     {{#if operation.description}}{{operation.description}}{{else}}{{method}} {{path}}{{/if}}
     """
     raise HTTPException(status_code=501, detail="Endpoint not implemented yet")
+
 {{/each}}

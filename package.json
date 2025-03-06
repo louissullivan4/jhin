@@ -1,6 +1,6 @@
 {
   "name": "jhin-generator",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Jhin is a code generation tool for OpenAPI specifications",
   "main": "dist/index.js",
   "bin": {
@@ -13,7 +13,7 @@
     "README.md"
   ],
   "scripts": {
-    "build": "tsc && copyfiles -u 1 'templates/**/*' dist/templates",
+    "build": "tsc && copyfiles -u 1 'templates/**/*' dist/templates && chmod +x dist/cli/index.js",
     "start": "node dist/cli/index.js",
     "test": "jest",
     "coverage": "jest --coverage",
