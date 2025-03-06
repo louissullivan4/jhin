@@ -1,7 +1,7 @@
 {
   "name": "jhin-generator",
   "version": "1.0.4",
-  "description": "Jhin is a code generation tool for OpenAPI specifications",
+  "description": "Jhin is a code generation tool for OpenAPI specifications.",
   "main": "dist/index.js",
   "bin": {
     "jhin": "./dist/cli/index.js"
