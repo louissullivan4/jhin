@@ -29,12 +29,6 @@ jobs:
       - name: Run tests (with coverage)
         run: npm run coverage
 
-      - name: Upload coverage artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: coverage-report
-          path: coverage
-
   codeql-scan:
     needs: [build-test-coverage]
     runs-on: ubuntu-latest
@@ -89,15 +83,6 @@ jobs:
           prerelease: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Upload build artifact
-        uses: actions/upload-release-asset@v1
-        if: steps.create_release.outputs.upload_url != ''
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./dist/jhin.zip
-          asset_name: jhin.zip
-          asset_content_type: application/zip
 
       - name: Publish to npm
         run: |
